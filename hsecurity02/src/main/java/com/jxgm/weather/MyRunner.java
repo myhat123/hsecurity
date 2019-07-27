@@ -32,6 +32,7 @@ public class MyRunner implements CommandLineRunner {
         logger.info("My First Apache Shiro Application");
 
         // Factory<SecurityManager> factory = new IniSecurityManagerFactory("classpath:shiro.ini");
+        // SecurityManager securityManager = factory.getInstance();
 
         DefaultSecurityManager securityManager = new DefaultSecurityManager();
         securityManager.setRealm(realm);
