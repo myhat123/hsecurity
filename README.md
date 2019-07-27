@@ -10,3 +10,16 @@
 
     hsecurity03 继承JdbcRealm，自定义Realm
     hsecurity04 采用SimpleAccountRealm 只有user(password), role两部分，不包含permission
+
+    hsecurity05 JdbcRealm
+        直接看shiro源码，有3个表users, user_roles, roles_permissions
+        根据hsecurity01的shiro.ini来写入表
+        增加spring-boot-starter-jdbc自动拿到DataSource的Bean
+        https://github.com/apache/shiro/blob/master/core/src/main/java/org/apache/shiro/realm/jdbc/JdbcRealm.java
+
+## 数据库
+
+    sudo su
+    su - postgres
+    createdb -E utf8 -O jxyz hsctest
+    psql -h localhost -U jxyz -d hsctest < schema.sql
