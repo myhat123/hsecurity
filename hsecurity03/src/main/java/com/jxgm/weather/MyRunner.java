@@ -52,7 +52,10 @@ public class MyRunner implements CommandLineRunner {
             //collect user principals and credentials in a gui specific manner
             //such as username/password html form, X509 certificate, OpenID, etc.
             //We'll use the username/password example here since it is the most common.
-            UsernamePasswordToken token = new UsernamePasswordToken("lonestarr", "vespa");
+
+            // UsernamePasswordToken token = new UsernamePasswordToken("lonestarr", "vespa");
+
+            UsernamePasswordToken token = new UsernamePasswordToken("lonestarr", "vespa1");
         
             //this is all you have to do to support 'remember me' (no config - built in!):
             token.setRememberMe(true);
@@ -64,6 +67,7 @@ public class MyRunner implements CommandLineRunner {
             } catch ( UnknownAccountException uae ) {
                 //username wasn't in the system, show them an error message?
             } catch ( IncorrectCredentialsException ice ) {
+                logger.info("密码不对");
                 //password didn't match, try again?
             } catch ( LockedAccountException lae ) {
                 //account for that username is locked - can't login.  Show them a message?
