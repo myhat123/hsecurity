@@ -7,3 +7,5 @@
     hsecurity02 Introduction to Apache Shiro
         不用ini配置文件，直接构建realm
         https://github.com/eugenp/tutorials/tree/master/apache-shiro
+
+    hsecurity03 继承JdbcRealm，自定义Realm
