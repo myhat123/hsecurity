@@ -17,6 +17,9 @@
         增加spring-boot-starter-jdbc自动拿到DataSource的Bean
         https://github.com/apache/shiro/blob/master/core/src/main/java/org/apache/shiro/realm/jdbc/JdbcRealm.java
 
+        setPermissionsLookupEnabled(true or false)
+        此方法存在，应该是为了极度简化user, role两部分即可解决安全权限
+
 ## 数据库
 
     sudo su
