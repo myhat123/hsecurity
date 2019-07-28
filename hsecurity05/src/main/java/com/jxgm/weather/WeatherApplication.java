@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.apache.shiro.realm.Realm;
 import org.apache.shiro.realm.jdbc.JdbcRealm;
 
+import javax.sql.DataSource;
+
 @SpringBootApplication
 public class WeatherApplication {
 
@@ -15,8 +17,15 @@ public class WeatherApplication {
 		SpringApplication.run(WeatherApplication.class, args);
 	}
 
+	// 由spring jdbc提供DataSource Bean
+	@Autowired
+	DataSource dataSource;
+	
 	@Bean
     public Realm realm() {
-        return new JdbcRealm();
-    }
+		JdbcRealm realm = new JdbcRealm();
+		realm.setDataSource(dataSource);
+		return realm;
+	}
+	
 }

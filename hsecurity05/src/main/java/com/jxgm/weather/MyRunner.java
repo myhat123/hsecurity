@@ -20,8 +20,6 @@ import org.apache.shiro.subject.Subject;
 import org.apache.shiro.util.Factory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.sql.DataSource;
-
 @Component
 public class MyRunner implements CommandLineRunner {
 
@@ -30,17 +28,12 @@ public class MyRunner implements CommandLineRunner {
     @Autowired
     JdbcRealm realm;
 
-    @Autowired
-    DataSource dataSource;
-
     @Override
     public void run(String... args) throws Exception {
         logger.info("My First Apache Shiro Application");
 
         // Factory<SecurityManager> factory = new IniSecurityManagerFactory("classpath:shiro.ini");
         // SecurityManager securityManager = factory.getInstance();
-
-        realm.setDataSource(dataSource);
         
         DefaultSecurityManager securityManager = new DefaultSecurityManager();
         securityManager.setRealm(realm);
@@ -93,6 +86,12 @@ public class MyRunner implements CommandLineRunner {
             logger.info("May the Schwartz be with you!");
         } else {
             logger.info("Hello, mere mortal.");
+        }
+
+        if (currentUser.hasRole("goodguy")) {
+            logger.info("May the goodguy be with you!");
+        } else {
+            logger.info("Hello.");
         }
 
         //test a typed permission (not instance-level)
