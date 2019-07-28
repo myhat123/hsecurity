@@ -25,6 +25,9 @@ public class WeatherApplication {
     public Realm realm() {
 		JdbcRealm realm = new JdbcRealm();
 		realm.setDataSource(dataSource);
+
+		// 若不调用，则只有user roles，没有permission
+		realm.setPermissionsLookupEnabled(true);
 		return realm;
 	}
 	
