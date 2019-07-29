@@ -16,8 +16,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @Controller
 public class ShiroSpringController {
+
+    private static Logger log = LoggerFactory.getLogger(ShiroSpringController.class);
 
     @Autowired
     HttpServletRequest req;
@@ -43,7 +48,8 @@ public class ShiroSpringController {
           try {
             currentUser.login(token);
           } catch (AuthenticationException ae) {
-              ae.printStackTrace();
+              // ae.printStackTrace();
+              log.info("登录失败，请检查用户名" + cred.getUsername() + "及口令...");
               attr.addFlashAttribute("error", "Invalid Credentials");
               return "redirect:/login";
           }
