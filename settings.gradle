@@ -10,4 +10,4 @@
 rootProject.name = 'hsecurity'
 
 include 'hsecurity01', 'hsecurity02', 'hsecurity03', 'hsecurity04'
-include 'hsecurity05'
+include 'hsecurity05', 'hsecurity06'

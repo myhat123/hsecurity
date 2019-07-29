@@ -20,6 +20,11 @@
         setPermissionsLookupEnabled(true or false)
         此方法存在，应该是为了极度简化user, role两部分即可解决安全权限
 
+    hsecurity06 隔离Bean配置
+        单独ShiroConfig设置shiro, 主程序保持简单
+        ShiroAutoConfiguration已经自动装配了securityManager
+        对于默认的JdbcReam中的指定表，可以采用不同的表名及sql来处理
+
 ## 数据库
 
     sudo su
