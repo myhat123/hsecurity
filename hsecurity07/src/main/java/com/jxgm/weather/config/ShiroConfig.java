@@ -13,22 +13,10 @@ import org.apache.shiro.authz.AuthorizationException;
 
 import javax.sql.DataSource;
 
-import org.springframework.http.HttpStatus;
-// import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.ResponseStatus;
-
-import java.util.HashMap;
-import java.util.Map;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @Configuration
-@ControllerAdvice
 public class ShiroConfig {
 
 	private static Logger log = LoggerFactory.getLogger(ShiroConfig.class);
@@ -49,9 +37,13 @@ public class ShiroConfig {
 
 	@Bean
     public ShiroFilterChainDefinition shiroFilterChainDefinition() {
-        DefaultShiroFilterChainDefinition chainDefinition = new DefaultShiroFilterChainDefinition();
-        chainDefinition.addPathDefinition("/login", "authc"); // need to accept POSTs from the login form
-        chainDefinition.addPathDefinition("/logout", "logout");
-        return chainDefinition;
+        DefaultShiroFilterChainDefinition filter
+          = new DefaultShiroFilterChainDefinition();
+
+        filter.addPathDefinition("/secure", "authc");
+        filter.addPathDefinition("/**", "anon");
+
+        return filter;
     }
+
 }
