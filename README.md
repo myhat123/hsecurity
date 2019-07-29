@@ -26,6 +26,10 @@
         ShiroAutoConfiguration已经自动装配了securityManager
         对于默认的JdbcReam中的指定表，可以采用不同的表名及sql来处理
 
+    hsecurity07 初步完成shiro login
+        controller采用手动验证
+        https://github.com/eugenp/tutorials/tree/master/apache-shiro
+
 ## 数据库
 
     sudo su
