@@ -9,9 +9,7 @@ import org.apache.shiro.realm.jdbc.JdbcRealm;
 
 import org.apache.shiro.spring.web.config.DefaultShiroFilterChainDefinition;
 import org.apache.shiro.spring.web.config.ShiroFilterChainDefinition;
-import org.apache.shiro.subject.Subject;
 import org.apache.shiro.authz.AuthorizationException;
-import org.apache.shiro.SecurityUtils;
 
 import javax.sql.DataSource;
 
@@ -49,27 +47,11 @@ public class ShiroConfig {
 		return realm;
 	}
 
-	@ExceptionHandler(AuthorizationException.class)
-    @ResponseStatus(HttpStatus.FORBIDDEN)
-    public String handleException(AuthorizationException e, ModelMap map) {
-
-        // you could return a 404 here instead (this is how github handles 403, so the user does NOT know there is a
-        // resource at that location)
-        log.debug("AuthorizationException was thrown", e);
-		map.addAttribute("error", "It is an error for auth.");
-        return "error";
-    }
-
 	@Bean
     public ShiroFilterChainDefinition shiroFilterChainDefinition() {
         DefaultShiroFilterChainDefinition chainDefinition = new DefaultShiroFilterChainDefinition();
         chainDefinition.addPathDefinition("/login", "authc"); // need to accept POSTs from the login form
         chainDefinition.addPathDefinition("/logout", "logout");
         return chainDefinition;
-    }
-
-    @ModelAttribute(name = "subject")
-    public Subject subject() {
-        return SecurityUtils.getSubject();
     }
 }
