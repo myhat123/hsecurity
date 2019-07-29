@@ -19,6 +19,8 @@ import org.apache.shiro.mgt.SecurityManager;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.annotation.PostConstruct;
+
 @Component
 public class MyRunner implements CommandLineRunner {
 
@@ -30,6 +32,11 @@ public class MyRunner implements CommandLineRunner {
     @Autowired
     SecurityManager securityManager;
 
+    @PostConstruct
+    private void initStaticSecurityManager() {
+        SecurityUtils.setSecurityManager(securityManager);
+    }
+
     @Override
     public void run(String... args) throws Exception {
         logger.info("My First Apache Shiro Application");
@@ -40,7 +47,7 @@ public class MyRunner implements CommandLineRunner {
         // DefaultSecurityManager securityManager = new DefaultSecurityManager();
         // securityManager.setRealm(realm);
 
-        SecurityUtils.setSecurityManager(securityManager);
+        // SecurityUtils.setSecurityManager(securityManager);
 
         Subject currentUser = SecurityUtils.getSubject();
         Session session = currentUser.getSession();

@@ -3,6 +3,7 @@
     hsecurity01 shiro官网示例 安全机制包含user(password), role
         http://shiro.apache.org/tutorial.html
         http://shiro.apache.org/architecture.html
+        https://shiro.apache.org/spring-boot.html
     
     hsecurity02 Introduction to Apache Shiro
         不用ini配置文件，直接构建realm
