@@ -30,6 +30,14 @@
         controller采用手动验证
         https://github.com/eugenp/tutorials/tree/master/apache-shiro
 
+    hsecurity08 采用salt加密密码
+        更改users表字段长度和类型，schema.sql
+        使用junit test方式插入一个用户信息
+        仍然使用JdbcRealm
+            
+        realm.setSaltStyle(SaltStyle.COLUMN);
+        realm.setCredentialsMatcher(hashedCredentialsMatcher());
+
 ## 数据库
 
     sudo su
