@@ -7,9 +7,13 @@ import org.springframework.context.annotation.Configuration;
 import org.apache.shiro.realm.Realm;
 import org.apache.shiro.realm.jdbc.JdbcRealm;
 
+// enum类型的引用
+import org.apache.shiro.realm.jdbc.JdbcRealm.SaltStyle;
+
 import org.apache.shiro.spring.web.config.DefaultShiroFilterChainDefinition;
 import org.apache.shiro.spring.web.config.ShiroFilterChainDefinition;
 import org.apache.shiro.authz.AuthorizationException;
+import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 
 import javax.sql.DataSource;
 
@@ -24,7 +28,17 @@ public class ShiroConfig {
     // 由spring jdbc提供DataSource Bean
 	@Autowired
 	DataSource dataSource;
-    
+	
+    @Bean
+    public HashedCredentialsMatcher hashedCredentialsMatcher() {
+        HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();
+       
+        hashedCredentialsMatcher.setHashAlgorithmName("md5");
+        hashedCredentialsMatcher.setHashIterations(2);
+       
+        return hashedCredentialsMatcher;
+    }
+
 	@Bean
     public Realm realm() {
         JdbcRealm realm = new JdbcRealm();
@@ -32,6 +46,9 @@ public class ShiroConfig {
 
 		// 若不调用，则只有user roles，没有permission
 		realm.setPermissionsLookupEnabled(true);
+
+        realm.setSaltStyle(SaltStyle.COLUMN);
+        realm.setCredentialsMatcher(hashedCredentialsMatcher());
 		return realm;
 	}
 
